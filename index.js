@@ -6,94 +6,82 @@ const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const generateHTML = require("./src/generateHTML");
 
+const employeeArray = [];
+
 //questions array
-inquirer
-  .prompt([
-    {
-      name: "title",
-      type: "input",
-      message: "Enter the title of your project.",
-    },
-    {
-      name: "description",
-      type: "input",
-      message: "Enter a description for your application.",
-    },
-    {
-      name: "screenshot",
-      type: "input",
-      message: "Enter the file path to a screenshot of your application (begin with './').",
-      validate: function (input) {
-        const valid = input.startsWith("./");
-        return valid || "Please enter a valid file path.";
+const createEmployee = () => {
+  return inquirer
+    .prompt([
+      {
+        name: "role",
+        type: "list",
+        message: "What employee type would you like to create?",
+        choices: ["Manager", "Engineer", "Intern"],
       },
-    },
-    {
-      name: "screenshotDescription",
-      type: "input",
-      message: "Enter descriptive text for your screenshot.",
-    },
-    {
-      name: "installation",
-      type: "input",
-      message: "Enter intstructions for installing your application.",
-    },
-    {
-      name: "usage",
-      type: "input",
-      message: "Provide instructions and examples for use.",
-    },
-    {
-      name: "license",
-      type: "list",
-      message: "Choose which license applies:",
-      choices: ["MIT", "APACHE 2.0", "GPL 3.0", "BSD 3", "None"],
-    },
-    {
-      name: "contribute",
-      type: "input",
-      message: "Enter instructions for how to contribute to your application.",
-    },
-    {
-      name: "tests",
-      type: "input",
-      message: "Enter instructions for how to test that your application is working properly.",
-    },
-    {
-      name: "contactName",
-      type: "input",
-      message: "Enter the name of the person to contact if a user has questions.",
-    },
-    {
-      name: "email",
-      type: "input",
-      message: "Enter an email address for that contact person.",
-    },
-    {
-      name: "github",
-      type: "input",
-      message: "Enter the GitHub username for that contact person.",
-    },
-    {
-      name: "repoLocation",
-      type: "input",
-      message: "Enter the URL for the GitHub repo (include https://).",
-      validate: function (input) {
-        const valid = input.startsWith("https://");
-        return valid || "Please enter a valid website.";
+      {
+        name: "name",
+        type: "input",
+        message: "Enter the employee's name.",
       },
-    },
-    {
-      name: "pagesLocation",
-      type: "input",
-      message: "Enter the URL for the GitHub pages (include https://).",
-      validate: function (input) {
-        const valid = input.startsWith("https://");
-        return valid || "Please enter a valid website.";
+      {
+        name: "empID",
+        type: "input",
+        message: "Enter the employee's employee ID.",
       },
-    },
-  ])
-  .then((answers) => {
-    const HTMLText = generateHTML.generateHTML(answers);
-    fs.writeFile("./dist/index.html", HTMLText, (err) => (err ? console.error(err) : console.log("Success! Your HTML file has generated.")));
-  });
+      {
+        name: "email",
+        type: "input",
+        message: "Enter the employee's email address.",
+      },
+      {
+        name: "officeNum",
+        type: "input",
+        when: (answers) => answers.role === "Manager",
+        message: "Enter the employee's office number.",
+      },
+      {
+        name: "gitHub",
+        type: "input",
+        when: (answers) => answers.role === "Engineer",
+        message: "Enter the employee's GitHub username.",
+      },
+      {
+        name: "school",
+        type: "input",
+        when: (answers) => answers.role === "Intern",
+        message: "Enter the name of the intern's school.",
+      },
+      {
+        name: "confirm",
+        type: "confirm",
+        message: "Would you like to add another employee?",
+        default: false,
+      },
+    ])
+    .then((employeeData) => {
+      let { role, name, empID, email, officeNum, gitHub, school, confirm } = employeeData;
+      let teamMember;
+
+      if (role === "Manager") {
+        teamMember = new Manager(name, empID, email, role, officeNum);
+      } else if (role === "Engineer") {
+        teamMember = new Engineer(name, empID, email, role, gitHub);
+      } else if (role === "intern") {
+        teamMember = new Intern(name, empID, email, role, school);
+      }
+      employeeArray.push(teamMember);
+
+      if (confirm) {
+        return createEmployee(employeeArray);
+      } else {
+        return employeeArray;
+      }
+    });
+};
+
+createEmployee().then((employeeArray) => {
+  const HTMLText = generateHTML(employeeArray);
+  console.log(employeeArray);
+  fs.writeFile("./dist/index.html", HTMLText, (err) => (err ? console.error(err) : console.log("Success! Your HTML file has generated.")));
+  return generateHTML(employeeArray);
+});
