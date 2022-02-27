@@ -80,8 +80,8 @@ const createEmployee = () => {
 };
 
 createEmployee().then((employeeArray) => {
-  const HTMLText = generateHTML(employeeArray);
+  const HTMLText = generateEmployeesHTML(employeeArray);
   console.log(employeeArray);
   fs.writeFile("./dist/index.html", HTMLText, (err) => (err ? console.error(err) : console.log("Success! Your HTML file has generated.")));
-  return generateHTML(employeeArray);
+  return generateEmployeesHTML(employeeArray);
 });
