@@ -6,7 +6,7 @@ const managerCard = function (manager) {
     </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${manager.empID}</li>
-        <li class="list-group-item">Email: ${manager.email}</li>
+        <li class="list-group-item">Email: <a href = "mailto: ${manager.email}">${manager.email}</a></li>
         <li class="list-group-item">Office Number: ${manager.officeNum}</li>
     </ul>
 </div>`;
@@ -20,8 +20,8 @@ const engineerCard = function (engineer) {
       </div>
       <ul class="list-group list-group-flush">
           <li class="list-group-item">ID: ${engineer.empID}</li>
-          <li class="list-group-item">Email: ${engineer.email}</li>
-          <li class="list-group-item">GitHub Username: ${engineer.gitHub}</li>
+          <li class="list-group-item">Email: <a href = "mailto: ${engineer.email}">${engineer.email}</a></li>
+          <li class="list-group-item">GitHub Username: <a href = "https://github.com/${engineer.gitHub}" target="_blank">${engineer.gitHub}</a></li>
       </ul>
   </div>`;
 };
@@ -34,7 +34,7 @@ const internCard = function (intern) {
       </div>
       <ul class="list-group list-group-flush">
           <li class="list-group-item">ID: ${intern.empID}</li>
-          <li class="list-group-item">Email: ${intern.email}</li>
+          <li class="list-group-item">Email: <a href = "mailto: ${intern.email}">${intern.email}</a></li>
           <li class="list-group-item">School: ${intern.school}</li>
       </ul>
   </div>`;
@@ -74,13 +74,13 @@ function generateHTML(memberCards) {
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-      <title>Document</title>
+      <title>My Team</title>
   </head>
 
   <body>
-
+<div class="row justify-content-center">
     ${memberCards}
-
+</div>
   </body>
 
   </html>`;

@@ -7,7 +7,11 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "testEmployee": "jest ./tests/Employee.test.js",
+    "testEngineer": "jest ./tests/Engineer.test.js",
+    "testIntern": "jest ./tests/Intern.test.js",
+    "testManager": "jest ./tests/Manager.test.js"
   },
   "repository": {
     "type": "git",

@@ -1,9 +1,9 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
-const Employee = require("./lib/employee");
-const Manager = require("./lib/manager");
-const Engineer = require("./lib/engineer");
-const Intern = require("./lib/intern");
+const Employee = require("./lib/Employee");
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 const generateHTML = require("./src/generateHTML");
 
 const employeeArray = [];
@@ -66,7 +66,7 @@ const createEmployee = () => {
         teamMember = new Manager(name, empID, email, role, officeNum);
       } else if (role === "Engineer") {
         teamMember = new Engineer(name, empID, email, role, gitHub);
-      } else if (role === "intern") {
+      } else if (role === "Intern") {
         teamMember = new Intern(name, empID, email, role, school);
       }
       employeeArray.push(teamMember);
