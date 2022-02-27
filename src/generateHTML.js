@@ -1,8 +1,8 @@
 const managerCard = function (manager) {
   return ` <div class="card" style="width: 18rem;">
     <div class="card-header">
-        ${manager.name}
-        Manager
+    <h2 class="font-weight-bold">${manager.name}</h2>
+    <h3 class="font-weight-bold">Manager</h3>
     </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${manager.empID}</li>
@@ -15,8 +15,8 @@ const managerCard = function (manager) {
 const engineerCard = function (engineer) {
   return ` <div class="card" style="width: 18rem;">
       <div class="card-header">
-          ${engineer.name}
-          Engineer
+      <h2 class="font-weight-bold">${engineer.name}</h2>
+      <h3 class="font-weight-bold">Engineer</h3>
       </div>
       <ul class="list-group list-group-flush">
           <li class="list-group-item">ID: ${engineer.empID}</li>
@@ -29,8 +29,8 @@ const engineerCard = function (engineer) {
 const internCard = function (intern) {
   return ` <div class="card" style="width: 18rem;">
       <div class="card-header">
-          ${intern.name}
-          Intern
+      <h2 class="font-weight-bold">${intern.name}</h2>
+      <h3 class="font-weight-bold">Intern</h3>
       </div>
       <ul class="list-group list-group-flush">
           <li class="list-group-item">ID: ${intern.empID}</li>
@@ -76,9 +76,13 @@ function generateHTML(memberCards) {
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
       <title>My Team</title>
   </head>
-
+  <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4 text-center">My Team</h1>
+  </div>
+</div>
   <body>
-<div class="row justify-content-center">
+<div class="row justify-content-center mx-auto">
     ${memberCards}
 </div>
   </body>

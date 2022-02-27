@@ -4,7 +4,7 @@ const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const generateHTML = require("./src/generateHTML");
+require("./src/generateHTML");
 
 const employeeArray = [];
 
@@ -63,11 +63,11 @@ const createEmployee = () => {
       let teamMember;
 
       if (role === "Manager") {
-        teamMember = new Manager(name, empID, email, role, officeNum);
+        teamMember = new Manager(name, empID, email, officeNum);
       } else if (role === "Engineer") {
-        teamMember = new Engineer(name, empID, email, role, gitHub);
+        teamMember = new Engineer(name, empID, email, gitHub);
       } else if (role === "Intern") {
-        teamMember = new Intern(name, empID, email, role, school);
+        teamMember = new Intern(name, empID, email, school);
       }
       employeeArray.push(teamMember);
 
@@ -81,7 +81,6 @@ const createEmployee = () => {
 
 createEmployee().then((employeeArray) => {
   const HTMLText = generateEmployeesHTML(employeeArray);
-  console.log(employeeArray);
   fs.writeFile("./dist/index.html", HTMLText, (err) => (err ? console.error(err) : console.log("Success! Your HTML file has generated.")));
   return generateEmployeesHTML(employeeArray);
 });
