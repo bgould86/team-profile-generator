@@ -1,3 +1,4 @@
+// generates card for manager type
 const managerCard = function (manager) {
   return ` <div class="card" style="width: 18rem;">
     <div class="card-header">
@@ -12,6 +13,7 @@ const managerCard = function (manager) {
 </div>`;
 };
 
+// generates card for engineer type
 const engineerCard = function (engineer) {
   return ` <div class="card" style="width: 18rem;">
       <div class="card-header">
@@ -26,6 +28,7 @@ const engineerCard = function (engineer) {
   </div>`;
 };
 
+// generates card for intern type
 const internCard = function (intern) {
   return ` <div class="card" style="width: 18rem;">
       <div class="card-header">
@@ -40,6 +43,7 @@ const internCard = function (intern) {
   </div>`;
 };
 
+//pushes and joins generated cards to an array
 generateEmployeesHTML = (data) => {
   teamArray = [];
 
@@ -65,6 +69,8 @@ generateEmployeesHTML = (data) => {
 
   return createHTML;
 };
+
+//adds generated cards to rest of HTML
 function generateHTML(memberCards) {
   return `<!DOCTYPE html>
   <html lang="en">
